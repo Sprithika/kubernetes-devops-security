@@ -21,7 +21,7 @@ pipeline {
        }
       stage('Docker Build and Push') {
           steps{
-            sh "docker build -t siddharth67/numeric-apps:""$GIT_COMMIT"" ."
+            sh 'docker build -t siddharth67/numeric-apps:""$GIT_COMMIT"" .'
             sh 'docker push siddharth67/numeric-apps:""$GIT_COMMIT"" '
           }  
       }  
