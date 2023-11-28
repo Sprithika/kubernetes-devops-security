@@ -21,9 +21,9 @@ pipeline {
        }
       stage('Docker Build and Push') {
           steps{
-            
+            def cred = credentials('hub')
             sh 'docker build -t prithika246/numeric-apps:""$GIT_COMMIT"" .'
-            sh "docker login -u ${hub-un} -p ${hub-pass}"
+            sh "docker login -u ${cred.username} -p ${cred.password}"
             sh 'docker push prithika246/numeric-apps:""$GIT_COMMIT"" '
             sh ' docker logout'
           }  
