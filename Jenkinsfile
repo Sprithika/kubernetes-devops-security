@@ -21,8 +21,11 @@ pipeline {
        }
       stage('Docker Build and Push') {
           steps{
+            
             sh 'docker build -t prithika246/numeric-apps:""$GIT_COMMIT"" .'
+            sh "docker login -u ${hub-un} -p ${hub-pass}"
             sh 'docker push prithika246/numeric-apps:""$GIT_COMMIT"" '
+            sh ' docker logout'
           }  
       }  
     }
