@@ -21,7 +21,9 @@ pipeline {
        }
       stage('Docker Build and Push') {
           steps{
-            withDockerRegistry(credentialsId: 'hub', url: 'https://hub.docker.com/repository/docker/prithika246/') {
+            
+            withDockerRegistry(credentialsId: 'hub', url: "") {
+              sh 'docker build -t prithika246/numeric-apps:""$GIT_COMMIT"" .'
               sh 'docker push prithika246/numeric-apps:""$GIT_COMMIT"" '
               sh ' docker logout'
             }
