@@ -29,6 +29,14 @@ pipeline {
             }
 
           }  
-      }  
+      } 
+    stage('kubernetes Deployment') {
+      steps{
+        withKubeConfig(['credentialsId': 'kubeconfig']) {
+          sh "sed 's#replace#prithika246/numeric-apps:${GIT_COMMIT}#g' k8s_Deployment_service.yaml"
+          sh "kubectl appky -f k8s_Deployment_service.yaml"
+        }  
+      }
+    }
     }
 }
